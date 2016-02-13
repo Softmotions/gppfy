@@ -12,16 +12,22 @@ module.exports = function (file, opts) {
     opts = opts || {};
     var testHtml = /\.html$/;
     var testJs = /\.js$/;
-    var gppArgs = ['-n', '--nostdinc'];
+    var gppArgs = [
+        '-n',
+        '--nostdinc',
+        '+sSSS', '"', '"', '',
+        '+sSSS', "'", "'", '',
+        '+ssss', "`", "`", '',
+    ];
 
     if (testJs.test(file)) {
         gppArgs = gppArgs.concat([
-            '-U', '', '', '(', ',', ')', '(', ')', '#', '',
+            '-U', '@', '', '(', ',', ')', '(', ')', '#', '',
             '-M', '//#', '\\n', ' ', ' ', '\\n', '', ''
         ]);
     } else if (testHtml.test(file)) {
         gppArgs = gppArgs.concat([
-            '-U', '', '', '(', ',', ')', '(', ')', '#', '',
+            '-U', '@', '', '(', ',', ')', '(', ')', '#', '',
             '-M', '<!--#', '\\w-->', ' ', ' ', '\\w-->', '', ''
         ])
     } else {

@@ -3,7 +3,7 @@
 
 Use in browserify CLI:
 ```sh
-browserify -t [ gppfy -D foo1=bar1 -D foo2=bar2 -i include_macros ] ...
+browserify -t [ gppfy -D foo=bar -D foo2=bar2 -i include_macros ] ...
 ```
 
 Javascript:
@@ -11,12 +11,21 @@ Javascript:
 //#ifdef foo
 ...
 //#endif
+
+
+//#ifeq @foo bar
+...
+//#endif
+
+
+var hereIsBar = '@foo'; // hereIsBar === 'foo'
+
 ```
 
 
 HTML
 ```html
-<!--#ifeq foo bar -->
+<!--#ifeq @foo bar -->
 ...
 
 <!--#endif -->
