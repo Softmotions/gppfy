@@ -14,7 +14,6 @@ module.exports = function (file, opts) {
     var testJs = /\.js$/;
     var gppArgs = ['-n', '--nostdinc'];
 
-    console.error('file=' + file + ' opts=' + JSON.stringify(opts));
     if (testJs.test(file)) {
         gppArgs = gppArgs.concat([
             '-U', '', '', '(', ',', ')', '(', ')', '#', '',
@@ -53,7 +52,8 @@ module.exports = function (file, opts) {
     }
 
     if (opts['d']) {
-        console.error('gpp args: ' + JSON.stringify(gppArgs));
+        console.error('gpp sources file: ' + file + '\n ' +
+                'gpp args: ' + JSON.stringify(gppArgs));
     }
 
     return through(function (buf, enc, next) {
