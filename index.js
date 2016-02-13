@@ -14,19 +14,23 @@ module.exports = function (file, opts) {
     var testJs = /\.js$/;
     var gppArgs = [
         '-n',
-        '--nostdinc',
-        '+sSSS', '"', '"', '',
-        '+sSSS', "'", "'", '',
-        '+ssss', "`", "`", '',
+        '--nostdinc'
     ];
 
     if (testJs.test(file)) {
         gppArgs = gppArgs.concat([
+            '+sSSS', '"', '"', '\\',
+            '+sSSS', "'", "'", '\\',
+            '+sSSS', "`", "`", '\\',
+            '+csss', '/*', '*/',
+            '+cccC', '//', '\\n',
             '-U', '@', '', '(', ',', ')', '(', ')', '#', '',
-            '-M', '//#', '\\n', ' ', ' ', '\\n', '', ''
+            '-M', '#', '\\n', ' ', ' ', '\\n', '', ''
         ]);
     } else if (testHtml.test(file)) {
         gppArgs = gppArgs.concat([
+            //'+sSSi', '"', '"', '',
+            //'+sSSi', "'", "'", '',
             '-U', '@', '', '(', ',', ')', '(', ')', '#', '',
             '-M', '<!--#', '\\w-->', ' ', ' ', '\\w-->', '', ''
         ])
@@ -100,5 +104,3 @@ module.exports = function (file, opts) {
         child.stdin.end(buf);
     });
 };
-
-
