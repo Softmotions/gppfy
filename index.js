@@ -38,6 +38,7 @@ module.exports = function (file, opts) {
 
     var inc = opts['i'];
     var defs = opts['D'];
+    var nolog = !!opts['n'];
 
 
     if (typeof inc === 'string') {
@@ -80,8 +81,11 @@ module.exports = function (file, opts) {
             }
         }));
 
-        // stderr
-        child.stderr.pipe(fs.createWriteStream('gpp.log', {flags: 'a'}));
+        if (!nolog) {
+            child.__defineGetter__('stderr', function () {
+                return fs.createWriteStream('gpp.log', {flags: 'a'})
+            })
+        }
 
         // exit code
         child.on('exit', function (code, signal) {

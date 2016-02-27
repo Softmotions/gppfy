@@ -1,6 +1,6 @@
 {
   "name": "gppfy",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "GPP preprocessor integrated into Browserify",
   "main": "index.js",
   "dependencies": {
