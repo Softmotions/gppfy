@@ -82,9 +82,7 @@ module.exports = function (file, opts) {
         }));
 
         if (!nolog) {
-            child.__defineGetter__('stderr', function () {
-                return fs.createWriteStream('gpp.log', {flags: 'a'})
-            })
+            child.stderr.pipe(fs.createWriteStream('gpp.log', {flags: 'a'}));
         }
 
         // exit code
